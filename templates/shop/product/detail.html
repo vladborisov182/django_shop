@@ -1,0 +1,43 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-responsive prod-img-detail" src="{{ product.image.url }}" alt="">
+            </div>
+            <div class="col-md-8">
+                <h3>{{ product.name }}</h3>
+                <p class="price">
+                    Цена: {{ product.price }} ГРН
+                </p>
+                <h4>
+                    Категория: 
+                    <a href="{{ product.category.get_absolute_url }}">
+                        {{ product.category }}
+                    </a>
+                </h4>
+                {% if product.discount %}
+                    <p class="price">
+                        Скидка: {{ product.discount }}%
+                    </p>
+                {% endif %}
+                <p>
+                    Производитель: {{ product.manufacturer }}
+                </p>
+                <p>
+                    Год выпуска: {{ product.year_of_issue }}
+                </p>
+                <p>
+                    Отсалось на складе: {{ product.stock }}
+                </p>
+                <span>
+                    Описание: {{ product.description | linebreaks}}
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

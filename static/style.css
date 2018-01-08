@@ -1,0 +1,67 @@
+body {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+
+    font-family: 'Oswald', sans-serif;
+}
+
+html, body {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.product-name > a {
+    color: white;
+    text-decoration: none;
+}
+
+.panel-heading {
+    height: 90px;
+}
+
+.panel-body {
+    height: 150px;
+}
+
+.description {
+    height: 70px;
+}
+
+.panel-footer {
+    height: 55px;
+}
+
+.discount {
+    font-size: 16px;
+    position: absolute;
+    top: 28%;
+    left: 10%;
+}
+
+.price {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #000000;
+}
+
+.prod-img {
+    max-height: 130px;
+    position: absolute;
+    top: 0;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.prod-img-detail {
+    max-height: 350px;
+}
+
+.btn-search {
+    margin-top: 10px;
+}

@@ -1,0 +1,45 @@
+{% for product in products %}
+<div class="item col-md-4 text-center">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="product-name">
+                <a href="{{ product.get_absolute_url }}">
+                    {{ product.name|truncatechars_html:63 }}
+                </a>
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div>
+                <a href="{{ product.get_absolute_url }}" class="text-center">
+                    <img class="img-responsive prod-img" src="{{ product.image.url }}" alt="">
+                </a>
+                {% if product.discount %}
+                    <span class="discount label label-danger">Скидка {{ product.discount }}%</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="description">
+            <p>
+                {{ product.description|truncatechars_html:90 }}
+            </p>
+        </div>
+        <div class="panel-footer">
+            <div class="price pull-left">
+                Цена: {{ product.price }} ГРН
+            </div>
+            <div class="add-to-cart-btn pull-right ">
+                <a href="{{ product.get_absolute_url }}">
+                    <button class="btn btn-primary">
+                        Купить
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="col-md-12 text-center text-muted">
+    <h3>Товары отсутствуют</h3>
+</div>
+{% endfor %}
+

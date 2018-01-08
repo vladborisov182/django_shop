@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    {% if category %} {{ category.name }} {% else %} Страница товаров {% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% include 'shop/product/sidebar.html' %}
+        <div class="col-md-9 main">
+            <h3>
+                {% if category %} {{ category.name }} {% else %} Все {% endif %}
+            </h3>
+            <div class="items row">
+                {% include 'shop/product/product_item.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'shop/product/pagination.html' %}
+
+{% endblock %}
