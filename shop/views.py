@@ -12,7 +12,7 @@ def ProductList(request, category_slug=None):
     question = request.GET.get('q')
 
     if question:
-        products_list = Product.objects.filter(available=True, created__lte=timezone.now(), name__icontains=question).order_by('-created')
+        products_list = Product.objects.filter(name__icontains=question)
 
     elif category_slug:
         category = get_object_or_404(Category, slug=category_slug)

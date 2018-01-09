@@ -14,9 +14,6 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        '''
-        при помощи этой функции мы получаем абсолютный адрес товара или категории, где в качестве первого параметра вьюха, а в args мы указываем параметры url в том порядке, в котором написали в файле роутинга urls.py
-        '''
         return reverse('shop:ProductListByCategory', args=[self.slug])
 
 class Product(models.Model):

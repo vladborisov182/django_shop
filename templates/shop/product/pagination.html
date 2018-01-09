@@ -1,29 +1,27 @@
-<div class="container text-center">
-    <div class="row">
-        <div class="col-md-9 col-md-offset-3">
-            <nav aria-label="Page navigation">
-                {% if products.has_other_pages %}
-                    <ul class="pagination">
-                        {% if products.has_previous %}
-                            <li><a href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a></li>
-                        {% else %}
-                            <li class="disabled"><span>&laquo;</span></li>
-                        {% endif %}
-                        {% for i in products.paginator.page_range %}
-                        {% if products.number == i %}
-                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                        {% else %}
-                            <li><a href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                        {% if products.has_next %}
-                            <li><a href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
-                        {% else %}
-                            <li class="disabled"><span>&raquo;</span></li>
-                        {% endif %}
-                    </ul>
-                {% endif %}
-            </nav>
-        </div>
+<div class="row text-center">
+    <div class="col-md-9 col-md-offset-3">
+        <nav aria-label="Page navigation">
+            {% if products.has_other_pages %}
+                <ul class="pagination">
+                    {% if products.has_previous %}
+                        <li><a href="?page={{ products.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in products.paginator.page_range %}
+                    {% if products.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if products.has_next %}
+                        <li><a href="?page={{ products.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </nav>
     </div>
 </div>
