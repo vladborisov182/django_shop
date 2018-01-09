@@ -2,25 +2,18 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from .models import Category, Product
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .filter import ProductFilter
 
 # Страница с товарами
-def ProductList(request, category_slug=None):
-    category = None
-    categories = Category.objects.all()
+def ProductList(request):
     products_list = Product.objects.filter(available=True, created__lte=timezone.now()).order_by('-created')
+    product_filter = ProductFilter(request.GET, queryset=products_list)
 
-    question = request.GET.get('q')
+    last_products = products_list[:4]
 
-    if question:
-        products_list = Product.objects.filter(name__icontains=question)
+    paginator = Paginator(product_filter.qs, 6)
 
-    elif category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
-        products_list = products_list.filter(category=category)
-
-    paginator = Paginator(products_list, 3)
-
-    page = request.GET.get('page', 1)
+    page = request.GET.get('page')
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
@@ -29,9 +22,9 @@ def ProductList(request, category_slug=None):
         products = paginator.page(paginator.num_pages)
 
     return render(request, 'shop/product/list.html', {
-        'category' : category,
-        'categories' : categories,
+        'filter' : product_filter,
         'products' : products,
+        'last_products' : last_products
 })
 
 # Страница товара

@@ -8,32 +8,21 @@
         <div class="row">
             <div class="col-md-4">
                 <img class="img-responsive prod-img-detail" src="{{ product.image.url }}" alt="">
+                {% if product.discount %}
+                    <span class="discount-detail label label-danger">Скидка {{ product.discount }}%</span>
+                {% endif %}
             </div>
             <div class="col-md-8">
                 <h3>{{ product.name }}</h3>
-                <p class="price">
+                <h4 class="price">
                     Цена: {{ product.price }} ГРН
-                </p>
-                <h4>
-                    Категория: 
-                    <a href="{{ product.category.get_absolute_url }}">
-                        {{ product.category }}
-                    </a>
                 </h4>
-                {% if product.discount %}
-                    <p class="price">
-                        Скидка: {{ product.discount }}%
-                    </p>
-                {% endif %}
-                <p>
+                <h4>
                     Производитель: {{ product.manufacturer }}
-                </p>
-                <p>
+                </h4>
+                <h4>
                     Год выпуска: {{ product.year_of_issue }}
-                </p>
-                <p>
-                    Отсалось на складе: {{ product.stock }}
-                </p>
+                </h4>
                 <span>
                     Описание: {{ product.description | linebreaks}}
                 </span>

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'django.contrib.postgres',
+    'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -77,9 +79,9 @@ WSGI_APPLICATION = 'myshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myshop_db',
-        'USER' : 'bongoman',
-        'PASSWORD' : 'bongoman',
+        'NAME': 'shop_db',
+        'USER' : 'vladborisov',
+        'PASSWORD' : '22081995',
         'HOST' : '127.0.0.1',
         'PORT' : '5432',
     }
