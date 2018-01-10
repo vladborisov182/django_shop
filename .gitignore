@@ -1,5 +1,3 @@
-__pycache__
-/shop/__pycache__/
-/myshop/__pycache__/
+__pycache__/
 .vscode
 *.pyc

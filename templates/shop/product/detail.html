@@ -26,6 +26,21 @@
                 <span>
                     Описание: {{ product.description | linebreaks}}
                 </span>
+                <br>
+                {% if user.is_authenticated %}
+                    <div class="col-md-5">
+                        <button class="btn btn-warning">
+                            Добавить в корзину
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="col-md-5 text-center">
+                        <div class="alert alert-warning">
+                            Войдите чтобы добавить товар в корзину
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
             </div>
         </div>
     </div>

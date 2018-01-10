@@ -72,3 +72,27 @@ html, body {
 .btn-search {
     margin-top: 10px;
 }
+
+.btn-black {
+    background-color: #242121;
+    color: white;
+    border-color: #000000;
+}
+
+.btn-black:hover {
+    background-color: #131212;
+    color: white;
+    border-color: #000000;
+}
+
+.btn-black:active {
+    background-color: #000000;
+    color: white;
+    border-color: #000000;
+}
+
+.btn-black:focus {
+    background-color: #131212;
+    color: white;
+    border-color: #000000;
+}

@@ -3,11 +3,14 @@ from .models import Category, Product
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .filter import ProductFilter
+from django.contrib import auth 
 
 # Страница с товарами
 def ProductList(request):
     products_list = Product.objects.filter(available=True, created__lte=timezone.now()).order_by('-created')
     product_filter = ProductFilter(request.GET, queryset=products_list)
+
+    user = auth.get_user(request)
 
     last_products = products_list[:4]
 
@@ -24,13 +27,19 @@ def ProductList(request):
     return render(request, 'shop/product/list.html', {
         'filter' : product_filter,
         'products' : products,
-        'last_products' : last_products
+        'last_products' : last_products,
+        'user' : user,
 })
 
 # Страница товара
 def ProductDetail(request, id, slug):
+    user = auth.get_user(request)
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
-    return render(request, 'shop/product/detail.html', {'product' : product})
+    return render(request, 'shop/product/detail.html', {
+        'product' : product,
+        'user' : user,
+
+})
 
 
 
