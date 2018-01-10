@@ -4,6 +4,10 @@ from django.core.urlresolvers import reverse
 class Manufacturer(models.Model):
     name = models.CharField(max_length=200, db_index=True)
 
+    class Meta:
+        verbose_name = 'Производитель'
+        verbose_name_plural = 'Производители'
+
     def __str__(self):
         return self.name
 
@@ -11,8 +15,8 @@ class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
 
     class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
     def __str__(self):
         return self.name
@@ -36,6 +40,8 @@ class Product(models.Model):
         index_together = [
             ['id', 'slug']
         ]
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
 
     def __str__(self):
         return self.name
