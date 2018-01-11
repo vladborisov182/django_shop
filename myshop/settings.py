@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
     'shop',
 
+    'bootstrapform',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -54,9 +56,17 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '82daeb134e143b'
+EMAIL_HOST_PASSWORD = 'f8ac2f3ed8c724'
+EMAIL_PORT = '2525'
+
+
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
