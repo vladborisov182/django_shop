@@ -38,7 +38,6 @@ def ProductDetail(request, id, slug):
     return render(request, 'shop/product/detail.html', {
         'product' : product,
         'user' : user,
-
 })
 
 

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     'shop',
+    'callback',
 
     'bootstrapform',
 
@@ -60,6 +61,8 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '82daeb134e143b'
 EMAIL_HOST_PASSWORD = 'f8ac2f3ed8c724'
 EMAIL_PORT = '2525'
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 SITE_ID = 1
