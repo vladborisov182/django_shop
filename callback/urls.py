@@ -3,5 +3,5 @@ from callback import views
 
 
 urlpatterns = [
-    url(r'^callback/', views.CallbackForm, name='CallbackForm'),
+    url(r'^callback/', views.Callback, name='Callback'),
 ]

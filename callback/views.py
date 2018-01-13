@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import Callback_Form
 from django.core.mail import send_mail, get_connection
 
-def CallbackForm(request):
+def Callback(request):
     if request.method == 'POST':
         form = Callback_Form(request.POST)
         name = request.POST.get('name', '')
