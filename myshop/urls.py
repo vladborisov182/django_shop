@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^', include('shop.urls', namespace='shop')),
     url(r'^', include('callback.urls', namespace='callback')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^cart/', include('cart.urls', namespace='cart')),
 ] \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

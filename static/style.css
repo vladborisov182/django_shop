@@ -45,8 +45,8 @@ html, body {
 .discount-detail {
     font-size: 20px;
     position: absolute;
-    top: 14%;
-    left: 10%;
+    top: 5%;
+    left: 5%;
 }
 
 .price {
@@ -69,30 +69,10 @@ html, body {
     max-height: 350px;
 }
 
+.prod-img-cart-detail {
+    max-height: 80px;
+}
+
 .btn-search {
     margin-top: 10px;
-}
-
-.btn-black {
-    background-color: #242121;
-    color: white;
-    border-color: #000000;
-}
-
-.btn-black:hover {
-    background-color: #131212;
-    color: white;
-    border-color: #000000;
-}
-
-.btn-black:active {
-    background-color: #000000;
-    color: white;
-    border-color: #000000;
-}
-
-.btn-black:focus {
-    background-color: #131212;
-    color: white;
-    border-color: #000000;
 }

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap %}
 {% block head_title %}
     {{ product.name }}
 {% endblock %}
@@ -28,11 +29,15 @@
                 </span>
                 <br>
                 {% if user.is_authenticated %}
-                    <div class="col-md-5">
+                <form action="{% url "cart:CartAdd" product.id %}" method="post">
+                    <div class="col-md-3">
+                        {{ cart_product_form|bootstrap  }}
+                        {% csrf_token %}
                         <button class="btn btn-warning">
                             Добавить в корзину
                         </button>
                     </div>
+                </form>
                 {% else %}
                     <div class="col-md-5 text-center">
                         <div class="alert alert-warning">
@@ -40,7 +45,6 @@
                         </div>
                     </div>
                 {% endif %}
-                </div>
             </div>
         </div>
     </div>

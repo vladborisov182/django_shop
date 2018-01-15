@@ -12,17 +12,29 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/">Товары <span class="sr-only">(current)</span></a></li>
-                <li><a href="/callback">Обратная связь</a></li>
+                <li><a href="{% url 'shop:ProductList' %}">Товары <span class="sr-only">(current)</span></a></li>
+                <li><a href="{% url 'callback:Callback' %}">Обратная связь</a></li>
                 {% if user.is_staff %}
                     <li><a href="/admin">Админка</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    <li>
-                        <a href="#">Корзина</a>
-                    </li>
+                    {% with total_items=cart|length %}
+                        {% if cart|length > 0 %}
+                        <li>
+                            <a href="{% url 'cart:CartDetail' %}">
+                                Ваша корзина: {{ total_items }} тов.
+                            </a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'cart:CartDetail' %}">
+                                Корзина пуста
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endwith %}
                     <li>
                         <a href="/accounts/logout/">Выйти ({{ user.username }})</a>
                     </li>

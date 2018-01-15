@@ -4,8 +4,10 @@ from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .filter import ProductFilter
 from django.contrib import auth 
+from cart.forms import CartAddProductForm
 
-# Страница с товарами
+
+
 def ProductList(request):
     products_list = Product.objects.filter(available=True, created__lte=timezone.now()).order_by('-created')
     product_filter = ProductFilter(request.GET, queryset=products_list)
@@ -31,14 +33,17 @@ def ProductList(request):
         'user' : user,
 })
 
-# Страница товара
+
 def ProductDetail(request, id, slug):
     user = auth.get_user(request)
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
+    cart_product_form = CartAddProductForm()
     return render(request, 'shop/product/detail.html', {
         'product' : product,
         'user' : user,
+        'cart_product_form': cart_product_form,
 })
+
 
 
 
