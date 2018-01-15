@@ -25,12 +25,12 @@
         </div>
         <div class="panel-footer">
             <div class="price pull-left">
-                Цена: {{ product.price }} ГРН
+                Цена: {{ product.price_with_discount }} ГРН
             </div>
             <div class="add-to-cart-btn pull-right ">
                 <a href="{{ product.get_absolute_url }}">
                     <button class="btn btn-primary">
-                        Купить
+                        Подробнее
                     </button>
                 </a>
             </div>
