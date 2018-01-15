@@ -15,8 +15,15 @@
             </div>
             <div class="col-md-8">
                 <h3>{{ product.name }}</h3>
-                <h4 class="price">
-                    Цена: {{ product.price }} ГРН
+                <h4 class="price_with_discount">
+                    Цена: {{ product.price_with_discount }} ГРН 
+                    {% if product.discount %}
+                        <small class="text-danger">
+                            <del>
+                                ({{ product.price }} ГРН)
+                            </del>
+                        </small>
+                    {% endif %}
                 </h4>
                 <h4>
                     Производитель: {{ product.manufacturer }}

@@ -8,9 +8,9 @@
     <h1 class="text-center">Ваша корзина товаров</h1>
     {% if cart %}
         <div class="table-responsive">
-            <table class="cart table table-bordered">
+            <table class="cart table table-bordered table-condensed">
                 <thead>
-                    <tr>
+                    <tr class="active">
                         <th>Изображение</th>
                         <th>Продукт</th>
                         <th>Количество</th>
@@ -38,12 +38,12 @@
                                 </form>
                             </td>
                             <td><a href="{% url 'cart:CartRemove' product.id %}">Удалить</a></td>
-                            <td>{{ item.price }} грн.(Скидка {{ product.discount }}%)</td>
+                            <td>{{ item.price }} грн./шт.</td>
                             <td>{{ item.total_price }} грн.</td>
                         </tr>
                         {% endwith %}
                     {% endfor %}
-                        <tr class="total">
+                        <tr class="total success">
                             <td>Всего:</td>
                             <td colspan="4"></td>
                             <td>{{ cart.get_total_price }} грн.</td>
@@ -54,7 +54,7 @@
         <p class="text-right">
             <a href="{% url 'shop:ProductList'%}">
                 <button class="btn btn-warning">
-                    Продолжить Шопинг
+                    Продолжить шопинг
                 </button>
             </a>
             <a href="#">
@@ -64,7 +64,15 @@
             </a>
         </p>
     {% else %}
-    <h3 class="text-center text-muted"><em>Корзина пуста</em></h3>
+    <div class="text-center">
+        <h3 class="text-muted"><em>Корзина пуста</em></h3>
+        <br>
+        <a href="{% url 'shop:ProductList'%}">
+            <button class="btn btn-warning">
+                Начать шопинг
+            </button>
+        </a>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

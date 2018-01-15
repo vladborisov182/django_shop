@@ -31,6 +31,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, verbose_name='Описание')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
     discount = models.IntegerField(default=0, verbose_name='Скидка')
+    price_with_discount = models.DecimalField(default=0, max_digits=10, decimal_places=2, verbose_name='Цена со скидкой')
     available = models.BooleanField(default=True, verbose_name='Доступен')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     updated = models.DateTimeField(auto_now=True, verbose_name='Изменен')
@@ -48,3 +49,9 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('shop:ProductDetail', args=[self.id, self.slug])
+
+    def save(self, *args, **kwargs):
+        price = self.price
+        discount = self.discount
+        self.price_with_discount = price - (price * discount / 100)
+        super(Product, self).save(*args, **kwargs)

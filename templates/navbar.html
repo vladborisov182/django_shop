@@ -24,7 +24,7 @@
                         {% if cart|length > 0 %}
                         <li>
                             <a href="{% url 'cart:CartDetail' %}">
-                                Ваша корзина: {{ total_items }} тов.
+                                Ваша корзина: {{ total_items }} тов. {{ cart.get_total_price }} грн.
                             </a>
                         </li>
                         {% else %}
