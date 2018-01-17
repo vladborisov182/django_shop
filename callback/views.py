@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.shortcuts import render
+
 from .forms import Callback_Form
-from django.core.mail import send_mail, get_connection
+
 
 def Callback(request):
     if request.method == 'POST':

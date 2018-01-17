@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404, render_to_response
-from .models import Category, Product
-from django.utils import timezone
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .filter import ProductFilter
-from django.contrib import auth 
 from cart.forms import CartAddProductForm
+from django.contrib import auth
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
+from wishlist.forms import WishlistForm
 
+from .filter import ProductFilter
+from .models import Product
 
 
 def ProductList(request):
@@ -38,13 +39,12 @@ def ProductDetail(request, id, slug):
     user = auth.get_user(request)
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
+    wishlist_form = WishlistForm()
+    in_wish = user in product.wishlisted.all()
     return render(request, 'shop/product/detail.html', {
         'product' : product,
         'user' : user,
         'cart_product_form': cart_product_form,
+        'wishlist_form': wishlist_form,
+        'in_wish' : in_wish,
 })
-
-
-
-
-

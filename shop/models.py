@@ -1,5 +1,7 @@
-from django.db import models
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.db import models
+
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=200, db_index=True)
@@ -32,6 +34,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
     discount = models.IntegerField(default=0, verbose_name='Скидка')
     price_with_discount = models.DecimalField(default=0, max_digits=10, decimal_places=2, verbose_name='Цена со скидкой')
+    wishlisted = models.ManyToManyField(User, blank=True, related_name='wishlist_items', verbose_name='В избранном')
     available = models.BooleanField(default=True, verbose_name='Доступен')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
     updated = models.DateTimeField(auto_now=True, verbose_name='Изменен')

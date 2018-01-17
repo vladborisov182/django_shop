@@ -1,5 +1,5 @@
 {% for product in products %}
-<div class="item col-md-4 text-center">
+<div class="item col-md-3 text-center">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h4 class="product-name">
@@ -28,18 +28,17 @@
                 Цена: {{ product.price_with_discount }} ГРН
             </div>
             <div class="pull-right">
-                <a href="{{ product.get_absolute_url }}">
-                    <button class="btn btn-primary">
-                        Подробнее
-                    </button>
-                </a>
+                <form action="{% url "wishlist:WishlistDel" product.id %}" method="post">
+                    <div class="col-md-3">
+                        {{ wishlist_form }}
+                        {% csrf_token %}
+                        <button class="btn btn-danger">
+                            Удалить
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-{% empty %}
-<div class="col-md-12 text-center text-muted">
-    <h3>Товары отсутствуют</h3>
-</div>
 {% endfor %}
-

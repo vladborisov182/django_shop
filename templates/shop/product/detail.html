@@ -35,23 +35,49 @@
                     Описание: {{ product.description | linebreaks}}
                 </span>
                 <br>
-                {% if user.is_authenticated %}
-                <form action="{% url "cart:CartAdd" product.id %}" method="post">
-                    <div class="col-md-3">
-                        {{ cart_product_form|bootstrap  }}
-                        {% csrf_token %}
-                        <button class="btn btn-warning">
-                            Добавить в корзину
-                        </button>
-                    </div>
-                </form>
-                {% else %}
-                    <div class="col-md-5 text-center">
-                        <div class="alert alert-warning">
-                            Войдите чтобы добавить товар в корзину
+                <div class="container">
+                    {% if user.is_authenticated %}
+                        {% if in_wish %}
+                            <form action="{% url "wishlist:WishlistDel" product.id %}" method="post">
+                                <div class="col-md-3">
+                                    {{ wishlist_form|bootstrap }}
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger">
+                                            Удалить из избранного  
+                                    </button>
+                                </div>
+                            </form>
+                        {% else %}
+                            <form action="{% url "wishlist:WishlistAdd" product.id %}" method="post">
+                                <div class="col-md-3">
+                                    {{ wishlist_form|bootstrap }}
+                                    {% csrf_token %}
+                                    <button class="btn btn-success">
+                                            Добавить в избранное  
+                                    </button>
+                                </div>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <div class="col-md-5 text-center">
+                            <div class="alert alert-warning">
+                                Войдите чтобы добавить товар в избранное
+                            </div>
                         </div>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                </div>
+                <br><br>
+                <div class="container">
+                    <form action="{% url "cart:CartAdd" product.id %}" method="post">
+                        <div class="col-md-3">
+                            {{ cart_product_form|bootstrap }}
+                            {% csrf_token %}
+                            <button class="btn btn-warning">
+                                Добавить в корзину
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

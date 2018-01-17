@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'shop',
     'callback',
     'cart',
+    'wishlist',
 
     'bootstrapform',
 

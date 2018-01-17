@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Category, Product, Manufacturer
+
+from .models import Category, Manufacturer, Product
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']

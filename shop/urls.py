@@ -1,6 +1,5 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 from shop import views
-
 
 urlpatterns = [
     url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.ProductDetail, name='ProductDetail'),

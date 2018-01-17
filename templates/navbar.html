@@ -19,22 +19,27 @@
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                {% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+                    <li>
+                        <a href="{% url 'cart:CartDetail' %}">
+                            Ваша корзина: {{ total_items }} тов. {{ cart.get_total_price }} грн.
+                        </a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'cart:CartDetail' %}">
+                            Корзина пуста
+                        </a>
+                    </li>
+                    {% endif %}
+                {% endwith %}
                 {% if user.is_authenticated %}
-                    {% with total_items=cart|length %}
-                        {% if cart|length > 0 %}
-                        <li>
-                            <a href="{% url 'cart:CartDetail' %}">
-                                Ваша корзина: {{ total_items }} тов. {{ cart.get_total_price }} грн.
-                            </a>
-                        </li>
-                        {% else %}
-                        <li>
-                            <a href="{% url 'cart:CartDetail' %}">
-                                Корзина пуста
-                            </a>
-                        </li>
-                        {% endif %}
-                    {% endwith %}
+                    <li>
+                        <a href="{% url 'wishlist:WishlistDetail' %}">
+                            Избранное
+                        </a>
+                    </li>
                     <li>
                         <a href="/accounts/logout/">Выйти ({{ user.username }})</a>
                     </li>
