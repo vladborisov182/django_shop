@@ -17,10 +17,12 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='products/')),
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('shop.urls', namespace='shop')),
+    url(r'^products/', include('shop.urls', namespace='shop')),
     url(r'^', include('callback.urls', namespace='callback')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
