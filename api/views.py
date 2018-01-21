@@ -1,12 +1,13 @@
+import django_filters.rest_framework
 from django.contrib.auth.models import User
-from shop.models import Product, Manufacturer, Category
-from rest_framework import viewsets
-from .serializers import ProductSerializer, ManufacturerSerializer, CategorySerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, viewsets
+from shop.models import Category, Manufacturer, Product
 
+from shop.filters import ProductFilter
+from .serializers import (CategorySerializer, ManufacturerSerializer,
+                          ProductSerializer)
 
-class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all().order_by('-created')
-    serializer_class = ProductSerializer
 
 class ManufacturerViewSet(viewsets.ModelViewSet):
     queryset = Manufacturer.objects.all()
@@ -15,3 +16,9 @@ class ManufacturerViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all().order_by('-created')
+    serializer_class = ProductSerializer
+    filter_class = ProductFilter
+    filter_backends = (DjangoFilterBackend,)

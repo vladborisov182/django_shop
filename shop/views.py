@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from wishlist.forms import WishlistForm
 
-from .filter import ProductFilter
+from .filters import ProductFilter
 from .models import Product
 
 

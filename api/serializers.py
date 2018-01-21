@@ -1,8 +1,8 @@
-from shop.models import Product, Manufacturer, Category
 from rest_framework import serializers
+from shop.models import Category, Manufacturer, Product
 
 
-class ManufacturerSerializer(serializers.HyperlinkedModelSerializer):
+class ManufacturerSerializer(serializers.ModelSerializer):
 
     url = serializers.HyperlinkedIdentityField(view_name="api:manufacturer-detail")
 
@@ -10,7 +10,7 @@ class ManufacturerSerializer(serializers.HyperlinkedModelSerializer):
         model = Manufacturer
         fields = ('url', 'name')
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
 
     url = serializers.HyperlinkedIdentityField(view_name="api:category-detail")
 
@@ -19,7 +19,7 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
 
     url = serializers.HyperlinkedIdentityField(view_name="api:product-detail")
     manufacturer = ManufacturerSerializer()
@@ -27,4 +27,4 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('url', 'name', 'category', 'price', 'manufacturer', 'year_of_issue')
+        fields = ('url', 'name', 'price', 'year_of_issue', 'manufacturer', 'category')
