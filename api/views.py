@@ -1,11 +1,6 @@
 import django_filters.rest_framework
-from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, viewsets
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
+from rest_framework import viewsets
 from shop.filters import ProductFilter
 from shop.models import Category, Manufacturer, Product
 
