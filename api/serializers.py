@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from shop.models import Category, Manufacturer, Product
 
