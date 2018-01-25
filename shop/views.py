@@ -3,17 +3,14 @@ from django.contrib import auth
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
+from shop.filter import ProductFilter
+from shop.models import Product
 from wishlist.forms import WishlistForm
 
-from .filter import ProductFilter
-from .models import Product
 
-
-def ProductList(request):
+def product_list(request):
     products_list = Product.objects.filter(available=True, created__lte=timezone.now()).order_by('-created')
     product_filter = ProductFilter(request.GET, queryset=products_list)
-
-    user = auth.get_user(request)
 
     last_products = products_list[:4]
 
@@ -31,11 +28,11 @@ def ProductList(request):
         'filter' : product_filter,
         'products' : products,
         'last_products' : last_products,
-        'user' : user,
+        'user' : request.user,
 })
 
 
-def ProductDetail(request, id, slug):
+def product_detail(request, id, slug):
     user = auth.get_user(request)
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
