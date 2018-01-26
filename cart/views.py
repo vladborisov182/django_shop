@@ -1,4 +1,4 @@
-from cart.cart import Cart
+from cart.models import Cart
 from cart.forms import CartAddProductForm
 from django.shortcuts import get_object_or_404, redirect, render
 from shop.models import Product
