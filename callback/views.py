@@ -9,7 +9,7 @@ def call_back(request):
         name = request.POST.get('name', '')
         phone = request.POST.get('phone', '')
         if form.is_valid():
-            CallbackForm.send(name, phone)
+            CallbackForm.prepare_mail(name, phone)
             return render(request, 'callback/thanks.html')
 
     return render(request, 'callback/callbackform.html', {
