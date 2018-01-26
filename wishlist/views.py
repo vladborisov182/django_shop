@@ -3,11 +3,10 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from shop.models import Product
+from wishlist.forms import WishlistForm
 
-from .forms import WishlistForm
 
-
-def WishlistAdd(request, product_id):
+def wishlist_add(request, product_id):
     user = auth.get_user(request)
     product = get_object_or_404(Product, id=product_id)
     form = WishlistForm(request.POST)
@@ -17,7 +16,7 @@ def WishlistAdd(request, product_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def WishlistDel(request, product_id):
+def wishlist_del(request, product_id):
     user = auth.get_user(request)
     product = get_object_or_404(Product, id=product_id)
     form = WishlistForm(request.POST)
@@ -27,7 +26,7 @@ def WishlistDel(request, product_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def WishlistDetail(request):
+def wishlist_detail(request):
     wishlist_items = request.user.wishlist_items.all()
     paginator = Paginator(wishlist_items, 4)
 

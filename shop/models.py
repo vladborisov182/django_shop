@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Manufacturer(models.Model):
-    name = models.CharField(max_length=200, db_index=True)
+    name = models.CharField(max_length=35, db_index=True, verbose_name='Название')
 
     class Meta:
         verbose_name = 'Производитель'
@@ -14,7 +14,7 @@ class Manufacturer(models.Model):
         return self.name
 
 class Category(models.Model):
-    name = models.CharField(max_length=200, db_index=True)
+    name = models.CharField(max_length=35, db_index=True, verbose_name='Название')
 
     class Meta:
         verbose_name = 'Категория'
@@ -29,11 +29,11 @@ class Product(models.Model):
     name = models.CharField(max_length=200, db_index=True, verbose_name='Название')
     year_of_issue = models.IntegerField(verbose_name='Год выпуска')
     slug = models.SlugField(max_length=200, db_index=True, verbose_name='Ссылка')
-    image = models.ImageField(upload_to='products/%Y/%m/%d/', blank=True, verbose_name='Изображение товара')
-    description = models.TextField(blank=True, verbose_name='Описание')
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
+    image = models.ImageField(upload_to='products/%Y/%m/%d/', verbose_name='Изображение товара')
+    description = models.TextField(max_length=300, verbose_name='Описание')
+    price = models.IntegerField(default=0, verbose_name='Цена')
     discount = models.IntegerField(default=0, verbose_name='Скидка')
-    price_with_discount = models.DecimalField(default=0, max_digits=10, decimal_places=2, verbose_name='Цена со скидкой')
+    price_with_discount = models.IntegerField(default=0, verbose_name='Цена со скидкой')
     wishlisted = models.ManyToManyField(User, blank=True, related_name='wishlist_items', verbose_name='В избранном')
     available = models.BooleanField(default=True, verbose_name='Доступен')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создан')
@@ -56,5 +56,5 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         price = self.price
         discount = self.discount
-        self.price_with_discount = price - (price * discount / 100)
+        self.price_with_discount = int(price) - (int(price) * discount / 100)
         super(Product, self).save(*args, **kwargs)

@@ -4,18 +4,18 @@
     Обратная связь
 {% endblock %}
 {% block content %}
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
+                <h1>Обратная связь</h1>
                 <form action="{% url 'callback:Callback' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="name">Ваше имя: </label>
-                        <input class="form-control" type="text" name='name' placeholder='Иван' required>
+                        {{ form.name }}
                     </div>
                     <div class="form-group">
-                        <label for="name">Номер вашего телефона: </label>
-                        <input class="form-control" type="tel" name='phone' placeholder='+3XXXXXXXXXX' required>
+                        {{ form.phone }}
                     </div>
                     <button class="btn btn-success" type="submit">
                         Отправить

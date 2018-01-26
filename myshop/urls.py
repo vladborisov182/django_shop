@@ -18,11 +18,10 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic.base import RedirectView
-from rest_framework.authtoken import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='products/')),
+    url(r'^admin/', admin.site.urls),
     url(r'^products/', include('shop.urls', namespace='shop')),
     url(r'^', include('callback.urls', namespace='callback')),
     url(r'^accounts/', include('allauth.urls')),
