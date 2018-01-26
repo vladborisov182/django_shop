@@ -7,7 +7,7 @@ class CallbackForm(forms.Form):
     name = forms.CharField(label='Имя', max_length=50, widget=forms.TextInput(attrs={'placeholder':'Имя', 'class':'form-control', 'title': 'Ваше имя'}))
     phone = forms.CharField(label='Номер телефона', widget=forms.TextInput(attrs={'placeholder':'Телефон', 'type':'phone', 'class':'form-control', 'required': 'True', 'title': 'Пример: 80XXYYYYYYY'}))
 
-    def send(name, phone):
+    def prepare_mail(name, phone):
         mail_host = 'smtp.mailtrap.io'
         recipients = ['blinkvlad182@gmail.com']
         message = '''
