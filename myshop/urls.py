@@ -27,7 +27,6 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'^wishlist/', include('wishlist.urls', namespace='wishlist')),
-    url(r'^v1.0/', include('api.urls', namespace='api')),
 ] \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

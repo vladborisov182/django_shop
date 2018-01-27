@@ -44,17 +44,13 @@ INSTALLED_APPS = [
     
     'django_filters',
     'widget_tweaks',
-    'bootstrapform',
 
     'shop',
     'callback',
     'cart',
     'wishlist',
-    'api',
 
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
+    'bootstrapform',
 
     'allauth',
     'allauth.account',
@@ -124,6 +120,9 @@ DATABASES = {
         'PASSWORD' : '22081995',
         'HOST' : '127.0.0.1',
         'PORT' : '5432',
+        'TEST': {
+            'NAME': 'test_shop_db',
+        },
     }
 }
 

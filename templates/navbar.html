@@ -12,7 +12,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="{% url 'shop:ProductList' %}">Товары <span class="sr-only">(current)</span></a></li>
+                <li><a href="{% url 'shop:ProductList' %}">Товары<span class="sr-only">(current)</span></a></li>
                 <li><a href="{% url 'callback:Callback' %}">Обратная связь</a></li>
                 {% if user.is_staff %}
                     <li><a href="/admin">Админка</a></li>
