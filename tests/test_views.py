@@ -93,7 +93,7 @@ class ShopViewTest(TestCase):
 
         self.assertTemplateUsed(resp, 'shop/product/list.html')
 
-    def test_shop_product_detail_view_uses_correct_template(self): 
+    def test_shop_product_detail_view_url_exists_at_desired_location(self): 
         category = Category.objects.create(name='Смартфоны')
         manufacturer = Manufacturer.objects.create(name='Apple')
         Product.objects.create(name='Test product smartphone', image='1.jpg', category=category, manufacturer=manufacturer, 

@@ -42,7 +42,7 @@
                                 <div class="col-md-3">
                                     {{ wishlist_form|bootstrap }}
                                     {% csrf_token %}
-                                    <button class="btn btn-danger">
+                                    <button class="btn btn-danger btn-wishlist-del">
                                             Удалить из избранного  
                                     </button>
                                 </div>
@@ -52,7 +52,7 @@
                                 <div class="col-md-3">
                                     {{ wishlist_form|bootstrap }}
                                     {% csrf_token %}
-                                    <button class="btn btn-success">
+                                    <button class="btn btn-success btn-wishlist-add">
                                             Добавить в избранное  
                                     </button>
                                 </div>
@@ -72,7 +72,7 @@
                         <div class="col-md-3">
                             {{ cart_product_form|bootstrap }}
                             {% csrf_token %}
-                            <button class="btn btn-warning">
+                            <button class="btn btn-warning btn-cart">
                                 Добавить в корзину
                             </button>
                         </div>
