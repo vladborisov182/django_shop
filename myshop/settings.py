@@ -120,6 +120,9 @@ DATABASES = {
         'PASSWORD' : '22081995',
         'HOST' : '127.0.0.1',
         'PORT' : '5432',
+        'TEST': {
+            'NAME': 'test_shop_db',
+        },
     }
 }
 
