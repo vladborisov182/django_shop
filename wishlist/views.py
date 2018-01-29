@@ -4,8 +4,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from shop.models import Product
 from wishlist.forms import WishlistForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='/accounts/login/')
 def wishlist_add(request, product_id):
     user = auth.get_user(request)
     product = get_object_or_404(Product, id=product_id)
@@ -16,6 +17,7 @@ def wishlist_add(request, product_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@login_required(login_url='/accounts/login/')
 def wishlist_del(request, product_id):
     user = auth.get_user(request)
     product = get_object_or_404(Product, id=product_id)
@@ -26,6 +28,7 @@ def wishlist_del(request, product_id):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+@login_required(login_url='/accounts/login/')
 def wishlist_detail(request):
     wishlist_items = request.user.wishlist_items.all()
     paginator = Paginator(wishlist_items, 4)
