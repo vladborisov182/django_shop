@@ -23,13 +23,13 @@
                     {% for item in cart %}
                         {% with product=item.product %}
                         <tr>
-                            <td>
+                            <td name="product-image">
                                 <a href="{{ product.get_absolute_url }}">
                                     <img class="img-responsive prod-img-cart-detail" src="{{ product.image.url }}" alt="" />
                                 </a>
                             </td>
-                            <td>{{ product.name }}</td>
-                            <td>
+                            <td name="product-name">{{ product.name }}</td>
+                            <td name="product-quantity">
                                 <form action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
                                     {{ item.update_quantity_form.quantity }}
                                     {{ item.update_quantity_form.update }}
@@ -37,16 +37,16 @@
                                     <input type="submit" value="Обновить">
                                 </form>
                             </td>
-                            <td><a href="{% url 'cart:CartRemove' product.id %}">Удалить</a></td>
-                            <td>{{ item.price }} грн./шт.</td>
-                            <td>{{ item.total_price }} грн.</td>
+                            <td name="product-remove"><a href="{% url 'cart:CartRemove' product.id %}">Удалить</a></td>
+                            <td name="product-price">{{ item.price }} грн./шт.</td>
+                            <td name="product-total-price">{{ item.total_price }} грн.</td>
                         </tr>
                         {% endwith %}
                     {% endfor %}
                         <tr class="total success">
                             <td>Всего:</td>
                             <td colspan="4"></td>
-                            <td>{{ cart.get_total_price }} грн.</td>
+                            <td name="cart-total-price">{{ cart.get_total_price }} грн.</td>
                         </tr>
                 </tbody>
             </table>
