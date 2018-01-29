@@ -1,6 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from shop.filters import ProductFilter
+from shop.filter import ProductFilter
 from shop.models import Product
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
