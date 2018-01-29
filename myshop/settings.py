@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'callback',
     'cart',
     'wishlist',
+    'api',
 
     'bootstrapform',
 
