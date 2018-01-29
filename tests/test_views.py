@@ -16,8 +16,12 @@ def create_product(name, slug):
 class WishListViewTest(TestCase):
 
     def setUp(self):
-        User.objects.create_user(username='testuser', password='12345').save()
-        login = self.client.login(username='testuser', password='12345')
+        self.client.force_login(User.objects.get_or_create(username='testuser')[0])
+
+    def test_wishlist_view_for_anon(self): 
+        self.client.logout()
+        resp = self.client.get('/wishlist/') 
+        self.assertEqual(resp.status_code, 302)
 
     def test_wishlist_view_url_exists_at_desired_location(self): 
         resp = self.client.get('/wishlist/') 
