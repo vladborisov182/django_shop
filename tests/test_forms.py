@@ -1,18 +1,50 @@
+from tests.product_creator import create_product
+
 from callback.forms import CallbackForm
 from cart.forms import CartAddProductForm
 from django.contrib.auth.models import User
 from django.test import TestCase
-from shop.models import Category, Manufacturer, Product
-from wishlist.forms import WishlistForm
-
-def create_product(name, slug): 
-    category = Category.objects.create(name='Test category')
-    manufacturer = Manufacturer.objects.create(name='Test manufacturer')
-    Product.objects.create(name=name, image='1.jpg', category=category, manufacturer=manufacturer, 
-    year_of_issue=2017, description='test description', price=1000, discount=10, price_with_discount=0, available=True, slug=slug)
+from shop.models import Product
 
 
 class CallbackFormTest(TestCase):
+
+    def test_callback_form_with_no_name_and_phone(self):
+        form = CallbackForm({})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors, {
+            'name': ['Это поле обязательно.'],
+            'phone': ['Это поле обязательно.'],
+        })
+
+    '''def test_callback_form_with_no_phone(self):
+        response = self.client.post("/callback/", {'name' : 'Leela'})
+        self.assertFormError(response, 'form', 'phone', 'Это поле обязательно.')'''
+
+    def test_callback_form_with_no_phone(self):
+        form = CallbackForm({'name' : 'Leela'})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors, {
+            'phone': ['Это поле обязательно.'],
+        })
+
+    '''def test_callback_form_with_no_name(self):
+        response = self.client.post("/callback/", {'phone' : '+380123456789'})
+        self.assertFormError(response, 'form', 'name', 'Это поле обязательно.')'''
+
+    def test_callback_form_with_no_name(self):
+        form = CallbackForm({'phone' : '+380123456789'})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors, {
+            'name': ['Это поле обязательно.'],
+        })
+
+    def test_callback_form_with_name_and_phone(self): 
+        form = CallbackForm({
+            'name': "Leela",
+            'phone': "+380123456789",
+        })
+        self.assertTrue(form.is_valid())
 
     def test_callback_form_name_field_label(self):
         form = CallbackForm()        
@@ -54,35 +86,49 @@ class CallbackFormTest(TestCase):
         form = CallbackForm() 
         self.assertEqual(form.fields['phone'].widget.attrs['title'], 'Пример: 80XXYYYYYYY')
 
-    def test_callback_form_send_mail_subject(self):
-        form_data = {'subject': 'Заявка на звонок'}
-        form = CallbackForm(data=form_data)
+class CartFormTest(TestCase):
+
+    def test_cart_form_with_no_quantity(self):
+        form = CartAddProductForm({})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors, {
+            'quantity': ['Это поле обязательно.'],
+        })
+
+    def test_cart_form_with_excess_of_quantity(self): 
+        form = CallbackForm({
+            'quantity': "21",
+        })
         self.assertFalse(form.is_valid())
 
-class CartAddProductFormTest(TestCase):
+    def test_cart_form_with_normal_quantity(self): 
+        form = CallbackForm({
+            'quantity': "1",
+        })
+        self.assertFalse(form.is_valid())
 
-    def test_cart_add_product_form_quantity_label(self):
+    def test_cart_form_quantity_label(self):
         form = CartAddProductForm()        
         self.assertTrue(form.fields['quantity'].label, 'Количество')
 
-    def test_cart_add_product_form_quantity_choices(self):
+    def test_cart_form_quantity_choices(self):
         PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 21)]
         form = CartAddProductForm()        
         self.assertTrue(form.fields['quantity'].choices, PRODUCT_QUANTITY_CHOICES)
 
-    def test_cart_add_product_form_quantity_coerce(self):
+    def test_cart_form_quantity_coerce(self):
         form = CartAddProductForm()        
         self.assertTrue(form.fields['quantity'].coerce, int)
 
-    def test_cart_add_product_form_update_required(self):
+    def test_cart_form_update_required(self):
         form = CartAddProductForm()        
         self.assertFalse(form.fields['update'].required, False)
 
-    def test_cart_add_product_form_update_initial(self):
+    def test_cart_form_update_initial(self):
         form = CartAddProductForm()        
         self.assertFalse(form.fields['update'].initial, False)
 
-    def test_cart_add_product_form_update_widget(self):
+    def test_cart_form_update_widget(self):
         form = CartAddProductForm()        
         self.assertTrue(form.fields['update'].widget, 'forms.HiddenInput')
 
@@ -113,3 +159,4 @@ class WishlistFormTest(TestCase):
         wishlist_items = user1.wishlist_items.all()
 
         self.assertQuerysetEqual(wishlist_items, [])
+    
