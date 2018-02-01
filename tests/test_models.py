@@ -1,12 +1,8 @@
+from tests.product_creator import create_product
+
 from django.db import IntegrityError
 from django.test import TestCase
 from shop.models import Category, Manufacturer, Product
-
-def create_product(name, slug): 
-    category = Category.objects.create(name='Test category')
-    manufacturer = Manufacturer.objects.create(name='Test manufacturer')
-    Product.objects.create(name=name, image='1.jpg', category=category, manufacturer=manufacturer, 
-    year_of_issue=2017, description='test description', price=1000, discount=10, price_with_discount=0, available=True, slug=slug)
 
 
 class ManufacturerModelTest(TestCase):
@@ -58,83 +54,59 @@ class ProductModelTest(TestCase):
     def setUpTestData(cls):
         create_product("Test", 'test')       
 
-    def test_name_label(self):
+    def test_product_labels_names(self):
+
         product = Product.objects.get(name='Test')
+
         field_label = product._meta.get_field('name').verbose_name
-        self.assertEquals(field_label,'Название')
+        self.assertEquals(field_label, 'Название')
 
-    def test_category_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('category').verbose_name
-        self.assertEquals(field_label,'Категория')
+        self.assertEquals(field_label, 'Категория')
 
-    def test_manufacturer_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('manufacturer').verbose_name
-        self.assertEquals(field_label,'Производитель')
+        self.assertEquals(field_label, 'Производитель')
 
-    def test_year_of_issue_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('year_of_issue').verbose_name
-        self.assertEquals(field_label,'Год выпуска')
+        self.assertEquals(field_label, 'Год выпуска')
 
-    def test_slug_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('slug').verbose_name
-        self.assertEquals(field_label,'Ссылка')
+        self.assertEquals(field_label, 'Ссылка')
 
-    def test_image_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('image').verbose_name
-        self.assertEquals(field_label,'Изображение товара')
+        self.assertEquals(field_label, 'Изображение товара')
 
-    def test_description_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('description').verbose_name
-        self.assertEquals(field_label,'Описание')
+        self.assertEquals(field_label, 'Описание')
 
-    def test_price_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('price').verbose_name
-        self.assertEquals(field_label,'Цена')
+        self.assertEquals(field_label, 'Цена')
 
-    def test_discount_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('discount').verbose_name
-        self.assertEquals(field_label,'Скидка')
+        self.assertEquals(field_label, 'Скидка')
 
-    def test_price_with_discount_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('price_with_discount').verbose_name
-        self.assertEquals(field_label,'Цена со скидкой')
+        self.assertEquals(field_label, 'Цена со скидкой')
 
-    def test_available_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('available').verbose_name
-        self.assertEquals(field_label,'Доступен')
+        self.assertEquals(field_label, 'Доступен')
 
-    def test_wishlisted_label(self):
-        product = Product.objects.get(name='Test')
         field_label = product._meta.get_field('wishlisted').verbose_name
-        self.assertEquals(field_label,'В избранном')
+        self.assertEquals(field_label, 'В избранном')
 
-    def test_name_max_length(self):
+    def test_product_fields_max_lengths(self):
+
         product = Product.objects.get(name='Test')
+
         max_length = product._meta.get_field('name').max_length
         self.assertEquals(max_length, 200)
 
-    def test_slug_max_length(self):
-        product = Product.objects.get(name='Test')
         max_length = product._meta.get_field('slug').max_length
         self.assertEquals(max_length, 200)
 
-    def test_description_max_length(self):
-        product = Product.objects.get(name='Test')
         max_length = product._meta.get_field('description').max_length
         self.assertEquals(max_length, 300)
 
-    def test_object_name_is_name(self):
-        product = Product.objects.get(name='Test')
         expected_object_name = (product.name)
         self.assertEquals(expected_object_name, str(product))
 
