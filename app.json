@@ -1,0 +1,11 @@
+{
+    "name": "Django project sample",
+    "description": "Django template project",
+    "repository": "https://github.com/vladborisov182/django_shop",
+    "logo": "https://www.pinpng.com/pngs/m/92-920703_anarchy-logo-png-anarchy-symbol-transparent-png.png",
+    "keywords": [
+        "python",
+        "django",
+        "template"
+    ]
+}
